@@ -1,0 +1,77 @@
+<div class="container" ng-controller="KardexController">
+    <div class="row mt-4 mb-4 justify-content-between">
+        <div class="col-4">
+            <h3>Listado de Tratamientos</h3>
+        </div>
+        <div class="col-3 text-right">
+            &nbsp;
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col col-sm-3 mt-4">
+            <div>
+                <p class="h4">Agregar tratamiento</p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="medicationRecord" ng-model="treatmentRecord" placeholder="Nombre del tratamiento">
+                    </div>
+                    <div class="form-group">
+                        <div class="row mt-4">
+                            <div class="col">
+                                <span class="my-1 mr-2">Tipo:</span>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="treatmentType" ng-model="treatmentType" id="treatmentIncome" ng-value="1" value="1">
+                                    <label class="form-check-label" for="treatmentIncome">Ingreso</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="treatmentType" ng-model="treatmentType" id="treatmentOutcome" ng-value="2" value="2">
+                                    <label class="form-check-label" for="treatmentOutcome">Egreso</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" ng-click="addTreatment()">Guardar</button>
+                </form>
+            </div>
+        </div>
+        <div class="col col-sm-9">
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        <div class="row mt-4 table-responsive">
+                            <div class="col">
+                                <table class="table table-hover table-sm table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" class="col-8">Tratamiento</th>
+                                        <th scope="col" class="col-2">Tipo</th>
+                                        <th scope="col">&nbsp;</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="treatment in treatmentsList">
+                                        <td scope="row">{{ treatment.tratamiento }}</td>
+                                        <td>
+                                            <span ng-if="treatment.tipo==1">Ingreso</span>
+                                            <span ng-if="treatment.tipo==2">Egreso</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-sm" ng-click="editTreatment(treatment.id)">
+                                                <span class="oi oi-pencil"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm" ng-click="removeTreatment(treatment.id)">
+                                                <span class="oi oi-circle-x"></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

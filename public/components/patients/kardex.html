@@ -1,0 +1,93 @@
+<div class="container" ng-controller="KardexController">
+    <div class="row mt-4 mb-4">
+        <a class="btn btn-sm btn-light" href="/#!/patients">< Volver al listado de Pacientes</a>
+    </div>
+    <div class="row justify-content-between">
+        <div class="col-4">
+            <h3>Juan Perez</h3>
+        </div>
+        <div class="col-3 text-right">
+            &nbsp;
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col col-sm-3">
+            <div>
+                <p class="h4">Agregar registro</p>
+                <form>
+                    <div class="form-group">
+                        <label>Fecha</label><br>
+                        <md-datepicker ng-model="dt"></md-datepicker>
+                    </div>
+                    <div class="form-group">
+                        <label for="medicationRecord">Medicación</label>
+                        <input type="text" class="form-control" id="medicationRecord" ng-model="medicationRecord">
+                    </div>
+                    <div class="form-group">
+                        <label for="viaRecord">Vía</label>
+                        <select class="custom-select form-control" id="viaRecord" ng-model="viaRecord">
+                            <option value="1">Oral</option>
+                            <option value="2">Intra venosa</option>
+                            <option value="3">Intra muscular</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+        <div class="col col-sm-9">
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        <div class="row mt-4 table-responsive">
+                            <div class="col">
+                                <table class="table table-hover table-sm table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" class="col-7">Medicamento</th>
+                                        <th scope="col" class="col-3">Vía</th>
+                                        <th scope="col">Fecha</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td scope="row">Aspirina</td>
+                                        <td>Oral</td>
+                                        <td>26-12-2018</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">Coaprovel</td>
+                                        <td>Oral</td>
+                                        <td>26-12-2018</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">Glucofage</td>
+                                        <td>Oral</td>
+                                        <td>26-12-2018</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

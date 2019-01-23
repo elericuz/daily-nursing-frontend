@@ -1,0 +1,40 @@
+<div class="container" ng-controller="PatientListController">
+    <div class="row mt-4 mb-4">
+        <div class="col mb-2">
+            <h2>Listado de Pacientes</h2>
+            <div class="row justify-content-between">
+                <div class="col-2"><a class="nav-link active" href="#">Crear Paciente</a></div>
+                <div class="col-5">
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control col-8 mr-sm-2" type="search" placeholder="Buscar por nombre o apellido" aria-label="Search" ng-model="patientName">
+                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" ng-click="searchPatient()">Buscar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="patient in patientsList">
+                    <th scope="row">{{ patient.id }}</th>
+                    <td>{{ patient.last_name }}</td>
+                    <td>{{ patient.first_name }}</td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm">Editar</button>
+                        <a href="/#!/monitor/{{ patient.id }}" class="btn btn-info btn-sm">Monitoreos</a>
+                        <a href="/#!/kardex/{{ patient.id }}"class="btn btn-danger btn-sm">Kardex</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

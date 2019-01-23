@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Asteria App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+    <link href="/assets/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.9/angular-material.min.css" />
+    <link rel="stylesheet" href="/css/app.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular-animate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular-sanitize.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular-aria.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular-messages.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.js"></script>
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.9/angular-material.min.js"></script>
+    <script src="index.js"></script>
+    <script src="routes.js"></script>
+    <script src="components/home/module.js"></script>
+    <script src="components/home/component.js"></script>
+    <script src="components/home/controller.js"></script>
+    <script src="components/patients/module.js"></script>
+    <script src="components/patients/component.js"></script>
+    <script src="components/patients/listcontroller.js"></script>
+    <script src="components/patients/monitorcontroller.js"></script>
+    <script src="components/patients/kardexcontroller.js"></script>
+    <script src="components/nursing/module.js"></script>
+    <script src="components/nursing/component.js"></script>
+    <script src="components/nursing/treatmentcontroller.js"></script>
+    <script src="components/nursing/procedurecontroller.js"></script>
+    <script src="components/nursing/medicinecontroller.js"></script>
+</head>
+<body>
+<div class="view-container" ng-app="AsteriaApp">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">Asteria</span>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/#!">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#!/patients">Pacientes</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Enfermería</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/#!/nursing/treatments">Tratamientos</a>
+                        <a class="dropdown-item" href="/#!/nursing/procedures">Procedimientos</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/#!/nursing/medicines">Medicinas</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#!/users">Usuarios</a>
+                </li>
+            </ul>
+            <a class="nav-link" href="#">Salir</a>
+        </div>
+    </nav>
+    <div class="bgimage">
+        <div class="container-fluid">
+            <div class="row">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+    <div ng-view class="view-frame"></div>
+</div>
+
+</body>
+</html>

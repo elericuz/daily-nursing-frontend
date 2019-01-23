@@ -1,0 +1,15 @@
+version: '3.5'
+
+services:
+
+  web:
+    container_name: asteria-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '8082:8080'
+
