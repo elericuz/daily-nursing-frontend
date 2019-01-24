@@ -33,12 +33,9 @@
                     </div>
                     <div class="form-group">
                         <label for="topicRecord">Procedimiento</label>
-                        <select class="custom-select form-control" id="topicRecord" ng-model="topicNursery">
-                            <option value="1">Frecuencia Cardiaca</option>
-                            <option value="2">Ritmo Cardiaco</option>
-                            <option value="3">Presión Arterial</option>
-                            <option value="4">Frecuencia Respiratoria</option>
-                            <option value="5">OX x M Alta Humedad (FIO2)</option>
+                        <select class="custom-select form-control" id="topicRecord"
+                                ng-model="topicNursery"
+                                ng-options="procedure.id as procedure.procedimiento for procedure in allProceduresList">
                         </select>
                     </div>
                     <div class="form-group">

@@ -36,6 +36,17 @@ angular.module('patients')
         }
         getTreatmentsList();
 
+        function getProceduresList() {
+            var url = 'http://127.0.0.1:8080/procedures';
+            $http({
+                method: 'GET',
+                url: url
+            }).then(function successCallback(response) {
+                $scope.allProceduresList = response.data;
+            });
+        }
+        getProceduresList();
+
         function getPatientProfile() {
             $http({
                 method: 'GET',

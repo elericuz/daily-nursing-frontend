@@ -14,9 +14,9 @@
                 <p class="h4">Agregar procedimiento</p>
                 <form>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="medicationRecord" ng-model="procedureRecord" placeholder="Nombre del procedimiento">
+                        <input type="text" class="form-control" id="procedureRecord" ng-model="procedureRecord" placeholder="Nombre del procedimiento">
                     </div>
-                    <button class="btn btn-primary">Guardar</button>
+                    <button class="btn btn-primary" ng-click="addProcedure()">Guardar</button>
                 </form>
             </div>
         </div>
@@ -34,17 +34,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td scope="row">Aspirina</td>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">Coaprovel</td>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">Glucofage</td>
-                                        <td>&nbsp;</td>
+                                    <tr ng-repeat="procedure in proceduresList">
+                                        <td scope="row">{{ procedure.procedimiento }}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-sm" ng-click="editProcedure(procedure.id)">
+                                                <span class="oi oi-pencil"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm" ng-click="removeProcedure(procedure.id)">
+                                                <span class="oi oi-circle-x"></span>
+                                            </button>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
