@@ -6,9 +6,9 @@ angular.module('patients')
 
         function getPatientList() {
             if ($scope.patientName) {
-                var url = 'http://127.0.0.1:8080/patients/' + $scope.patientName
+                var url = BACKEND + '/patients/' + $scope.patientName
             } else {
-                var url = 'http://127.0.0.1:8080/patients/'
+                var url = BACKEND + '/patients/'
             }
             $http({
                 method: 'GET',

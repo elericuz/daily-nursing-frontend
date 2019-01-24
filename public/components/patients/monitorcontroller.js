@@ -26,7 +26,7 @@ angular.module('patients')
         $scope.today();
 
         function getTreatmentsList() {
-            var url = 'http://127.0.0.1:8080/treatments';
+            var url = BACKEND + '/treatments';
             $http({
                 method: 'GET',
                 url: url
@@ -37,7 +37,7 @@ angular.module('patients')
         getTreatmentsList();
 
         function getProceduresList() {
-            var url = 'http://127.0.0.1:8080/procedures';
+            var url = BACKEND + '/procedures';
             $http({
                 method: 'GET',
                 url: url
@@ -50,7 +50,7 @@ angular.module('patients')
         function getPatientProfile() {
             $http({
                 method: 'GET',
-                url: 'http://127.0.0.1:8080/patients/profile/' + $scope.patientId
+                url: BACKEND + '/patients/profile/' + $scope.patientId
             }).then(function successCallback(response) {
                 $scope.patientName = response.data[0].xpaciente;
                 $scope.patientId = response.data[0].cpac;
@@ -71,7 +71,7 @@ angular.module('patients')
         function getNurseryInfo() {
             $http({
                 method: 'GET',
-                url: 'http://127.0.0.1:8080/patients/monitor/nursery/' + $scope.patientId,
+                url: BACKEND + '/patients/monitor/nursery/' + $scope.patientId,
                 params: { currentDate: $scope.dt }
             }).then(function successCallback(response) {
                 $scope.proceduresList = response.data;
@@ -81,7 +81,7 @@ angular.module('patients')
         function getBalanceInfo() {
             $http({
                 method: 'GET',
-                url: 'http://127.0.0.1:8080/patients/monitor/balance/' + $scope.patientId,
+                url: BACKEND + '/patients/monitor/balance/' + $scope.patientId,
                 params: { currentDate: $scope.dt }
             }).then(function successCallback(response) {
                 $scope.incomeList = response.data.income;
@@ -92,7 +92,7 @@ angular.module('patients')
         function getObservationInfo() {
             $http({
                 method: 'GET',
-                url: 'http://127.0.0.1:8080/patients/monitor/observations/' + $scope.patientId,
+                url: BACKEND + '/patients/monitor/observations/' + $scope.patientId,
                 params: { currentDate: $scope.dt }
             }).then(function successCallback(response) {
                 $scope.dayList = response.data.day;
@@ -107,7 +107,7 @@ angular.module('patients')
         $scope.saveNurseryRecord = function() {
             $http({
                 method: 'PUT',
-                url: 'http://127.0.0.1:8080/patients/monitor/nursery/' + this.patientId,
+                url: BACKEND + '/patients/monitor/nursery/' + this.patientId,
                 data: {
                     patientId: this.patientId,
                     date: this.dt,
@@ -123,7 +123,7 @@ angular.module('patients')
         $scope.saveBalanceRecord = function() {
             $http({
                 method: 'PUT',
-                url: 'http://127.0.0.1:8080/patients/monitor/balance/' + this.patientId,
+                url: BACKEND + '/patients/monitor/balance/' + this.patientId,
                 data: {
                     patientId: this.patientId,
                     treatment: this.treatmentTypeId,
@@ -139,7 +139,7 @@ angular.module('patients')
         $scope.saveObsRecord = function() {
             $http({
                 method: 'PUT',
-                url: 'http://127.0.0.1:8080/patients/monitor/obs/' + this.patientId,
+                url: BACKEND + '/patients/monitor/obs/' + this.patientId,
                 data: {
                     patientId: this.patientId,
                     date: this.dt,

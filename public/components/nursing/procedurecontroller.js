@@ -3,7 +3,7 @@
 angular.module('nursing')
     .controller('ProcedureController', ["$scope", "$http", "$q", function ($scope, $http, $q) {
         function getList() {
-            var url = 'http://127.0.0.1:8080/procedures';
+            var url = BACKEND + '/procedures';
             $http({
                 method: 'GET',
                 url: url
@@ -14,7 +14,7 @@ angular.module('nursing')
         getList();
 
         $scope.addProcedure = function() {
-            var url = 'http://127.0.0.1:8080/procedures/add';
+            var url = BACKEND + '/procedures/add';
             var data = {
                 procedure: this.procedureRecord
             };
@@ -38,7 +38,7 @@ angular.module('nursing')
         };
 
         $scope.editProcedure = function(procedureId) {
-            var url = 'http://127.0.0.1:8080/procedures/get/' + procedureId;
+            var url = BACKEND + '/procedures/get/' + procedureId;
             $http({
                 method: 'GET',
                 url: url
@@ -51,7 +51,7 @@ angular.module('nursing')
 
         $scope.removeProcedure = function (procedureId) {
             console.log(procedureId);
-            var url = 'http://127.0.0.1:8080/procedures/remove/' + procedureId;
+            var url = BACKEND + '/procedures/remove/' + procedureId;
             $http({
                 method: 'DELETE',
                 url: url

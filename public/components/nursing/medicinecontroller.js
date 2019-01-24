@@ -4,9 +4,9 @@ angular.module('nursing')
     .controller('MedicineController', ["$scope", "$http", "$q", function ($scope, $http, $q) {
         function getPatientList() {
             if ($scope.patientName) {
-                var url = 'http://127.0.0.1:8080/patients/' + $scope.patientName
+                var url = BACKEND + '/patients/' + $scope.patientName
             } else {
-                var url = 'http://127.0.0.1:8080/patients/'
+                var url = BACKEND + '/patients/'
             }
             $http({
                 method: 'GET',
@@ -15,10 +15,4 @@ angular.module('nursing')
                 $scope.patientsList = response.data;
             });
         }
-        // getPatientList();
-        //
-        // $scope.searchPatient = function() {
-        //     getPatientList(this.patientName);
-        // };
-
     }]);

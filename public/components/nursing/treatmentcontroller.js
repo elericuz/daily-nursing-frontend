@@ -3,7 +3,7 @@
 angular.module('nursing')
     .controller('TreatmentController', ["$scope", "$http", "$q", function ($scope, $http, $q) {
         function getTreatmentsList() {
-            var url = 'http://127.0.0.1:8080/treatments';
+            var url = BACKEND + '/treatments';
             $http({
                 method: 'GET',
                 url: url
@@ -14,7 +14,7 @@ angular.module('nursing')
         getTreatmentsList();
 
         $scope.addTreatment = function() {
-            var url = 'http://127.0.0.1:8080/treatments/add';
+            var url = BACKEND + '/treatments/add';
             var data = {
                 type: this.treatmentType,
                 treatment: this.treatmentRecord
@@ -38,7 +38,7 @@ angular.module('nursing')
         };
 
         $scope.editTreatment = function(treatmentId) {
-            var url = 'http://127.0.0.1:8080/treatments/get/' + treatmentId;
+            var url = BACKEND + '/treatments/get/' + treatmentId;
             $http({
                 method: 'GET',
                 url: url
@@ -52,7 +52,7 @@ angular.module('nursing')
 
         $scope.removeTreatment = function (treatmentId) {
             console.log(treatmentId);
-            var url = 'http://127.0.0.1:8080/treatments/remove/' + treatmentId;
+            var url = BACKEND + '/treatments/remove/' + treatmentId;
             $http({
                 method: 'DELETE',
                 url: url
