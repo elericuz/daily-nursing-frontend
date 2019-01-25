@@ -4,10 +4,10 @@
     </div>
     <div class="row justify-content-between">
         <div class="col-4">
-            <h3>Juan Perez</h3>
+            <h3>{{ patientName }}</h3>
         </div>
         <div class="col-3 text-right">
-            &nbsp;
+            <h4>{{ dt | date:'dd-MM-yyyy' }}</h4>
         </div>
     </div>
     <hr />
@@ -18,21 +18,30 @@
                 <form>
                     <div class="form-group">
                         <label>Fecha</label><br>
-                        <md-datepicker ng-model="dt"></md-datepicker>
+                        <md-datepicker
+                            ng-model="dt"
+                            md-max-date="today"
+                            md-current-view="month"
+                            ng-change="dateChange()"
+                        ></md-datepicker>
                     </div>
                     <div class="form-group">
-                        <label for="medicationRecord">Medicación</label>
-                        <input type="text" class="form-control" id="medicationRecord" ng-model="medicationRecord">
+                        <label for="medicineRecord">Medicación</label>
+                        <input type="text" class="form-control" id="medicineRecord" ng-model="medicineRecord">
                     </div>
                     <div class="form-group">
-                        <label for="viaRecord">Vía</label>
-                        <select class="custom-select form-control" id="viaRecord" ng-model="viaRecord">
+                        <label for="viaIdRecord">Vía</label>
+                        <select class="custom-select form-control" id="viaIdRecord" ng-model="viaIdRecord">
                             <option value="1">Oral</option>
                             <option value="2">Intra venosa</option>
                             <option value="3">Intra muscular</option>
                         </select>
                     </div>
-                    <button class="btn btn-primary">Guardar</button>
+                    <div class="form-group">
+                        <label for="dosisRecord">Dosis</label>
+                        <input type="text" class="form-control" id="dosisRecord" ng-model="dosisRecord">
+                    </div>
+                    <button class="btn btn-primary" ng-click="saveKardex();">Guardar</button>
                 </form>
             </div>
         </div>
@@ -45,40 +54,19 @@
                                 <table class="table table-hover table-sm table-bordered">
                                     <thead>
                                     <tr>
-                                        <th scope="col" class="col-7">Medicamento</th>
-                                        <th scope="col" class="col-3">Vía</th>
-                                        <th scope="col">Fecha</th>
+                                        <th scope="col" class="col-5">Medicamento</th>
+                                        <th scope="col" class="col-2">Vía</th>
+                                        <th scope="col" class="col-1">Dosis</th>
+                                        <th scope="col">Fecha y Hora</th>
+                                        <th scope="col" class="col-2">&nbsp;</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td scope="row">Aspirina</td>
-                                        <td>Oral</td>
-                                        <td>26-12-2018</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">Coaprovel</td>
-                                        <td>Oral</td>
-                                        <td>26-12-2018</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">Glucofage</td>
-                                        <td>Oral</td>
-                                        <td>26-12-2018</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">&nbsp;</td>
-                                        <td>&nbsp;</td>
+                                    <tr ng-repeat="kardex in kardexList">
+                                        <td scope="row">{{ kardex.medicina }}</td>
+                                        <td>{{ kardex.via }}</td>
+                                        <td>{{ kardex.dosis }}</td>
+                                        <td>{{ kardex.fecha }}</td>
                                         <td>&nbsp;</td>
                                     </tr>
                                     </tbody>
