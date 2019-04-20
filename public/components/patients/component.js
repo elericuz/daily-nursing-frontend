@@ -3,6 +3,14 @@ angular.module('patients')
         templateUrl: '/components/patients/patientslist.html',
         controller: 'PatientListController'
     })
+    .component('patientsNew', {
+        templateUrl: '/components/patients/patientsnew.html',
+        controller: 'PatientNewController'
+    })
+    .component('patientsEdit', {
+        templateUrl: '/components/patients/patientsedit.html',
+        controller: 'PatientEditController'
+    })
     .component('patientMonitor', {
         templateUrl: '/components/patients/monitor.html',
         controller: 'MonitorController'

@@ -10,6 +10,12 @@ angular.module('AsteriaApp').config(['$routeProvider',
         when('/patients', {
             template: '<patients-list></patients-list>'
         }).
+        when('/patients/new', {
+            template: '<patients-new></patients-new>'
+        }).
+        when('/patients/:id', {
+            template: '<patients-edit></patients-edit>'
+        }).
         when('/monitor/:id', {
             template: '<patient-monitor></patient-monitor>'
         }).

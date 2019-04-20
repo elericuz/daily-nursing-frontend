@@ -32,7 +32,7 @@
                     <div class="form-group">
                         <label for="viaIdRecord">Vía</label>
                         <select class="custom-select form-control" id="viaIdRecord" ng-model="viaIdRecord">
-                            <option value="1">Oral</option>
+                            <option value="1">Via Oral</option>
                             <option value="2">Intra venosa</option>
                             <option value="3">Intra muscular</option>
                         </select>
@@ -67,7 +67,14 @@
                                         <td>{{ kardex.via }}</td>
                                         <td>{{ kardex.dosis }}</td>
                                         <td>{{ kardex.fecha }}</td>
-                                        <td>&nbsp;</td>
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-sm" ng-click="editKardex(kardex.id)">
+                                                <span class="oi oi-pencil"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm" ng-click="removeKardex(kardex.id)">
+                                                <span class="oi oi-circle-x"></span>
+                                            </button>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>

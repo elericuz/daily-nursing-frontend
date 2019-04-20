@@ -53,7 +53,7 @@ angular.module('patients')
                 url: BACKEND + '/patients/profile/' + $scope.patientId
             }).then(function successCallback(response) {
                 $scope.patientName = response.data[0].xpaciente;
-                $scope.patientId = response.data[0].cpac;
+                $scope.patientId = response.data[0].id;
                 getNurseryInfo();
                 getBalanceInfo();
                 getObservationInfo();
