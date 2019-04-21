@@ -1,36 +1,63 @@
-<div class="container" ng-controller="PatientListController">
+<div ng-controller="PatientListController">
     <div class="row mt-4 mb-4">
         <div class="col mb-2">
             <h2>Listado de Pacientes</h2>
             <div class="row justify-content-between">
-                <div class="col-2"><a class="nav-link active" href="#!/patients/new">Crear Paciente</a></div>
-                <div class="col-5">
+                <div class="col-12 col-md-6 col-lg-7">
+                    <a class="btn btn-primary my-3 my-lg-2" href="#!/patients/new">Crear Paciente</a>
+                </div>
+                <div class="d-none d-md-block col-md-6 col-lg-5">
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control col-8 mr-sm-2" type="search" placeholder="Buscar por nombre o apellido" aria-label="Search" ng-model="patientName">
                         <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" ng-click="searchPatient()">Buscar</button>
                     </form>
                 </div>
             </div>
+            <div class="row d-block d-sm-none">
+                <form class="form-inline my-2 my-lg-0">
+                    <div class="col-8">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Buscar por nombre o apellido" aria-label="Search" ng-model="patientName">
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" ng-click="searchPatient()">Buscar</button>
+                    </div>
+                </form>
+            </div>
         </div>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">Código</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">&nbsp;</th>
+                    <th>
+                        <div class="row">
+                            <div class="col-4 col-md-1 col-lg-2">Código</div>
+                            <div class="col-4 col-md-3 col-lg-3">Apellidos</div>
+                            <div class="col-4 col-md-3 col-lg-3">Nombres</div>
+                            <div class="d-none d-md-block col-md-5 col-lg-4 text-right"></div>
+                        </div>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="patient in patientsList">
-                    <th scope="row">{{ patient.id }}</th>
-                    <td>{{ patient.last_name }}</td>
-                    <td>{{ patient.first_name }}</td>
                     <td>
-                        <a href="/#!/patients/{{ patient.id }}" class="btn btn-secondary btn-sm">Editar</a>
-                        <a href="/#!/monitor/{{ patient.id }}" class="btn btn-info btn-sm">Monitoreos</a>
-                        <a href="/#!/kardex/{{ patient.id }}"class="btn btn-danger btn-sm">Kardex</a>
+                        <div class="row">
+                            <div class="col-4 col-md-1 col-lg-2">{{ patient.id }}</div>
+                            <div class="col-4 col-md-3 col-lg-3">{{ patient.last_name }}</div>
+                            <div class="col-4 col-md-3 col-lg-3">{{ patient.first_name }}</div>
+                            <div class="d-none d-md-block col-md-5 col-lg-4 text-right">
+                                <a href="/#!/patients/{{ patient.id }}" class="btn btn-secondary btn-sm">Editar</a>
+                                <a href="/#!/monitor/{{ patient.id }}" class="btn btn-info btn-sm">Monitoreos</a>
+                                <a href="/#!/kardex/{{ patient.id }}"class="btn btn-danger btn-sm">Kardex</a>
+                            </div>
+                        </div>
+                        <div class="row d-block d-sm-none">
+                            <div class="col-12 text-center">
+                                <a href="/#!/patients/{{ patient.id }}" class="btn btn-secondary btn-sm">Editar</a>
+                                <a href="/#!/monitor/{{ patient.id }}" class="btn btn-info btn-sm">Monitoreos</a>
+                                <a href="/#!/kardex/{{ patient.id }}"class="btn btn-danger btn-sm">Kardex</a>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 </tbody>

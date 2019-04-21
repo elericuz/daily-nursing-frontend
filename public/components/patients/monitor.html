@@ -1,300 +1,384 @@
-<div class="container" ng-controller="MonitorController">
-    <div class="row mt-4 mb-4">
+<div ng-controller="MonitorController">
+    <div class="ml-0 row mt-4 mb-4">
         <a class="btn btn-sm btn-light" href="/#!/patients">< Volver al listado de Pacientes</a>
     </div>
-    <div class="row justify-content-between">
-        <div class="col-4">
+    <div class="row">
+        <div class="col-12 col-md-8">
             <h3>{{ patientName }}</h3>
         </div>
-        <div class="col-3 text-right">
-            <h4>{{ dt | date:'dd-MM-yyyy' }}</h4>
+        <div class="col-12 col-md-4 col-lg-3">
+            <md-datepicker
+                ng-model="dt"
+                md-max-date="today"
+                md-current-view="month"
+                ng-change="dateChange()"
+            ></md-datepicker>
         </div>
     </div>
-    <hr />
     <div class="row">
-        <div class="col col-sm-4">
-            <div style="display:inline-block; min-height:290px;">
-                <md-calendar ng-model="dt"
-                             md-max-date="today"
-                             md-current-view="month"
-                             ng-change="dateChange()"
-                ></md-calendar>
-            </div>
-            <hr>
-            <div ng-if="activeTab=='tracking'">
-                <p class="h4">Agregar registro</p>
-                <form>
-                    <div class="form-group">
-                        <label for="hourRecord">Hora</label>
-                        <select class="custom-select form-control"
-                                ng-model="selectedHourNursery"
-                                ng-options="x.hour as x.label for x in nurseryHours">
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="topicRecord">Procedimiento</label>
-                        <select class="custom-select form-control" id="topicRecord"
-                                ng-model="topicNursery"
-                                ng-options="procedure.id as procedure.procedimiento for procedure in allProceduresList">
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="valueRecord">Valor</label>
-                        <input type="text" class="form-control" id="valueRecord" ng-model="valueNursery">
-                    </div>
-                    <button class="btn btn-primary" ng-click="saveNurseryRecord()">Guardar</button>
-                </form>
-            </div>
-            <div ng-if="activeTab=='hydric'">
-                <p class="h4">Agregar registro</p>
-                <form>
-                    <div class="form-group">
-                        <label for="hourRecord">Hora</label>
-                        <select class="custom-select form-control" id="hourRecord" ng-model="balanceHourRecord">
-                            <option value="8am2pm">8am - 2pm</option>
-                            <option value="2pm8pm">2pm - 8pm</option>
-                            <option value="8pm2am">8pm - 2am</option>
-                            <option value="2am8am">2am - 8am</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="treatments">Tratamiento</label>
-                        <select class="custom-select form-control" id="treatments"
-                                ng-model="treatmentTypeId"
-                                ng-options="treatment.id as treatment.tratamiento for treatment in treatmentsList">
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="valueRecord">Valor</label>
-                        <input type="text" class="form-control" id="valueRecord" ng-model="valueBalance">
-                    </div>
-                    <button class="btn btn-primary" ng-click="saveBalanceRecord()">Guardar</button>
-                </form>
-            </div>
-            <div ng-if="activeTab=='notes'">
-                <p class="h4">Agregar registro</p>
-                <form>
-                    <div class="form-group">
-                        <label for="turnRecord">Turno</label>
-                        <select class="custom-select form-control" id="turnRecord" ng-model="turnObs">
-                            <option value="1">Turno día</option>
-                            <option value="2">Turno noche</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="noteRecord">Observación</label>
-                        <textarea rows="7" class="form-control" id="noteRecord" ng-model="noteObs"></textarea>
-                    </div>
-                    <button class="btn btn-primary" ng-click="saveObsRecord()">Guardar</button>
-                </form>
-            </div>
-        </div>
-        <div class="col col-sm-8">
-            <div class="row">
-                <div class="col-12">
-                    <ul class="nav nav-tabs" id="myTab" role="trackinglist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" ng-click="trackingTab('tracking')" role="tab" aria-controls="home" aria-selected="true">Monitoreo de Enfermería</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" ng-click="trackingTab('hydric')" role="tab" aria-controls="profile" aria-selected="false">Balance Hídrico</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" ng-click="trackingTab('notes')" role="tab" aria-controls="contact" aria-selected="false">Observaciones</a>
-                        </li>
-                    </ul>
+        <div class="col-12 d-block d-sm-none">
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                    ¿Qué desea reportar?
+                </button>
+                <div class="dropdown-menu dropdown-menu-lg-right">
+                    <button class="dropdown-item" type="button" ng-click="trackingTab('tracking')" >Monitoreo de Enfermería</button>
+                    <button class="dropdown-item" type="button" ng-click="trackingTab('hydric')" >Balance Hídrico</button>
+                    <button class="dropdown-item" type="button" ng-click="trackingTab('notes')" >Observaciones</button>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div ng-if="activeTab=='tracking'">
-                        <div class="row mt-4">
-                            <div class="col">
-                                <span class="my-1 mr-2">Grado de Dependencia</span>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                    <label class="form-check-label" for="inlineRadio1">I</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                    <label class="form-check-label" for="inlineRadio2">II</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-                                    <label class="form-check-label" for="inlineRadio3">III</label>
-                                </div>
-                            </div>
+            <hr>
+        </div>
+        <div class="col-12 d-none d-sm-block">
+            <ul class="nav nav-tabs nav-fill" id="myTab" role="trackinglist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" ng-click="trackingTab('tracking')" role="tab" aria-controls="home" aria-selected="true">Monitoreo de Enfermería</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" ng-click="trackingTab('hydric')" role="tab" aria-controls="profile" aria-selected="false">Balance Hídrico</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" ng-click="trackingTab('notes')" role="tab" aria-controls="contact" aria-selected="false">Observaciones</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div ng-if="activeTab=='tracking'">
+                <div class="row ml-0 pt-2">
+                    <div class="pl-0 col-12 col-md-10">
+                        <h4>Monitoreo de Enfermería</h4>
+                    </div>
+                    <div class="pl-0 col-12 col-md-2">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tracking">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mt-4">
+                    <div class="col">
+                        <span class="my-1 mr-2">Grado de Dependencia</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                            <label class="form-check-label" for="inlineRadio1">I</label>
                         </div>
-                        <hr>
-                        <div class="row table-responsive">
-                            <div class="col">
-                                <table class="table table-hover table-sm table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">&nbsp;</th>
-                                            <th scope="col" class="table-danger">8am</th>
-                                            <th scope="col" class="table-danger">10am</th>
-                                            <th scope="col" class="table-danger">12am</th>
-                                            <th scope="col" class="table-danger">2pm</th>
-                                            <th scope="col" class="table-danger">4pm</th>
-                                            <th scope="col" class="table-danger">6pm</th>
-                                            <th scope="col" class="table-primary">8pm</th>
-                                            <th scope="col" class="table-primary">10pm</th>
-                                            <th scope="col" class="table-primary">12pm</th>
-                                            <th scope="col" class="table-primary">2am</th>
-                                            <th scope="col" class="table-primary">4am</th>
-                                            <th scope="col" class="table-primary">6am</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="procedure in proceduresList">
-                                            <td scope="row">{{ procedure.procedure }}</td>
-                                            <td class="table-danger">{{ procedure.turns['8am'].value }}</td>
-                                            <td class="table-danger">{{ procedure.turns['10am'].value }}</td>
-                                            <td class="table-danger">{{ procedure.turns['12am'].value }}</td>
-                                            <td class="table-danger">{{ procedure.turns['2pm'].value }}</td>
-                                            <td class="table-danger">{{ procedure.turns['4pm'].value }}</td>
-                                            <td class="table-danger">{{ procedure.turns['6pm'].value }}</td>
-                                            <td class="table-primary">{{ procedure.turns['8pm'].value }}</td>
-                                            <td class="table-primary">{{ procedure.turns['10pm'].value }}</td>
-                                            <td class="table-primary">{{ procedure.turns['12pm'].value }}</td>
-                                            <td class="table-primary">{{ procedure.turns['2am'].value }}</td>
-                                            <td class="table-primary">{{ procedure.turns['4am'].value }}</td>
-                                            <td class="table-primary">{{ procedure.turns['6am'].value }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                            <label class="form-check-label" for="inlineRadio2">II</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                            <label class="form-check-label" for="inlineRadio3">III</label>
                         </div>
                     </div>
-                    <div ng-if="activeTab=='hydric'">
-                        <div class="row mt-4">
-                            <div class="col-6 form-inline">
-                                <div class="form-group">
-                                    <label class="my-1 mr-2" for="dietRecord">Dieta</label>
-                                    <input type="text" class="form-control" id="dietRecord" ng-model="dietRecord">
-                                    <span class="my-1 ml-2" >24 horas</span>
-                                </div>
-                            </div>
-                            <div class="col-6 form-inline">
-                                <div class="form-group">
-                                    <label class="my-1 mr-2" for="weightRecord">Peso</label>
-                                    <input type="text" class="form-control" id="weightRecord" ng-model="weightRecord">
-                                    <span class="my-1 ml-2">Kilos</span>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col">
-                                <p class="h4 text-center">Ingresos</p>
-                                <table class="table table-hover table-sm table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" class="col-4">&nbsp;</th>
-                                            <th scope="col" class="table-danger">8am-2pm</th>
-                                            <th scope="col" class="table-danger">2pm-8pm</th>
-                                            <th scope="col" class="table-primary">8pm-2am</th>
-                                            <th scope="col" class="table-primary">2am-8am</th>
-                                            <th scope="col">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="income in incomeList">
-                                            <td scope="row">{{ income.treatement }}</td>
-                                            <td class="table-danger">{{ income.turns['8am2pm'].value }}</td>
-                                            <td class="table-danger">{{ income.turns['2pm8pm'].value }}</td>
-                                            <td class="table-primary">{{ income.turns['8pm2am'].value }}</td>
-                                            <td class="table-primary">{{ income.turns['2am8am'].value }}</td>
-                                            <td>96</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Sub Total</th>
-                                            <th>96</th>
-                                            <th>&nbsp;</th>
-                                            <th>&nbsp;</th>
-                                            <th>&nbsp;</th>
-                                            <th>96</th>
-                                        <tr class="table-light">
-                                            <th scope="row">Total</th>
-                                            <th>96</th>
-                                            <th>&nbsp;</th>
-                                            <th>&nbsp;</th>
-                                            <th>&nbsp;</th>
-                                            <th>96</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <p class="h4 text-center">Egresos</p>
-                                <table class="table table-hover table-sm table-bordered"">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" class="col-4">&nbsp;</th>
-                                            <th scope="col" class="table-danger">8am-2pm</th>
-                                            <th scope="col" class="table-danger">2pm-8pm</th>
-                                            <th scope="col" class="table-primary">8pm-2am</th>
-                                            <th scope="col" class="table-primary">2am-8am</th>
-                                            <th scope="col">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="outcome in outcomeList">
-                                            <td scope="row">{{ outcome.treatement }}</td>
-                                            <td class="table-danger">{{ outcome.turns['8am2pm'].value }}</td>
-                                            <td class="table-danger">{{ outcome.turns['2pm8pm'].value }}</td>
-                                            <td class="table-primary">{{ outcome.turns['8pm2am'].value }}</td>
-                                            <td class="table-primary">{{ outcome.turns['2am8am'].value }}</td>
-                                            <td>96</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                </div>
+                <div class="row table-responsive">
+                    <div class="col">
+                        <table class="table table-hover table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">&nbsp;</th>
+                                    <th scope="col" class="table-danger">8am</th>
+                                    <th scope="col" class="table-danger">10am</th>
+                                    <th scope="col" class="table-danger">12am</th>
+                                    <th scope="col" class="table-danger">2pm</th>
+                                    <th scope="col" class="table-danger">4pm</th>
+                                    <th scope="col" class="table-danger">6pm</th>
+                                    <th scope="col" class="table-primary">8pm</th>
+                                    <th scope="col" class="table-primary">10pm</th>
+                                    <th scope="col" class="table-primary">12pm</th>
+                                    <th scope="col" class="table-primary">2am</th>
+                                    <th scope="col" class="table-primary">4am</th>
+                                    <th scope="col" class="table-primary">6am</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="procedure in proceduresList">
+                                    <td scope="row">{{ procedure.procedure }}</td>
+                                    <td class="table-danger">{{ procedure.turns['8am'].value }}</td>
+                                    <td class="table-danger">{{ procedure.turns['10am'].value }}</td>
+                                    <td class="table-danger">{{ procedure.turns['12am'].value }}</td>
+                                    <td class="table-danger">{{ procedure.turns['2pm'].value }}</td>
+                                    <td class="table-danger">{{ procedure.turns['4pm'].value }}</td>
+                                    <td class="table-danger">{{ procedure.turns['6pm'].value }}</td>
+                                    <td class="table-primary">{{ procedure.turns['8pm'].value }}</td>
+                                    <td class="table-primary">{{ procedure.turns['10pm'].value }}</td>
+                                    <td class="table-primary">{{ procedure.turns['12pm'].value }}</td>
+                                    <td class="table-primary">{{ procedure.turns['2am'].value }}</td>
+                                    <td class="table-primary">{{ procedure.turns['4am'].value }}</td>
+                                    <td class="table-primary">{{ procedure.turns['6am'].value }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="activeTab=='hydric'">
+                <div class="row ml-0 pt-2">
+                    <div class="pl-0 col-12 col-md-10">
+                        <h4>Balance Hídrico</h4>
+                    </div>
+                    <div class="pl-0 col-12 col-md-2">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#hydric">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mt-4">
+                    <div class="col-6 col-md-6 form-inline">
+                        <div class="form-group">
+                            <label class="my-1 mr-2" for="dietRecord">Dieta</label><br>
+                            <input type="text" class="col-4 form-control d-inline" id="dietRecord" ng-model="dietRecord">
+                            <span class="my-1 ml-2" >24 horas</span>
                         </div>
                     </div>
-                    <div ng-if="activeTab=='notes'">
-                        <div class="row mt-4">
-                            <div class="col">
-                                <p class="h4 text-center">Turno Día</p>
-                                <table class="table table-hover table-sm table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" class="col-2">Fecha y Hora de Registro</th>
-                                            <th scope="col">&nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="day in dayList">
-                                            <td scope="row">{{ day.hour }}</td>
-                                            <td>{{ day.observation }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <p class="h4 text-center">Turno Noche</p>
-                                <table class="table table-hover table-sm table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" class="col-2">Fecha y Hora de Registro</th>
-                                            <th scope="col">&nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="night in nightList">
-                                            <td scope="row">{{ night.hour }}</td>
-                                            <td>{{ night.observation }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                    <div class="col-6 col-md-6 form-inline">
+                        <div class="form-group">
+                            <label class="my-1 mr-2" for="weightRecord">Peso</label><br>
+                            <input type="text" class="col-4 form-control d-inline" id="weightRecord" ng-model="weightRecord">
+                            <span class="my-1 ml-2">Kilos</span>
                         </div>
                     </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <p class="h4 text-center">Ingresos</p>
+                        <table class="table table-hover table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="col-4">&nbsp;</th>
+                                    <th scope="col" class="table-danger">8am-2pm</th>
+                                    <th scope="col" class="table-danger">2pm-8pm</th>
+                                    <th scope="col" class="table-primary">8pm-2am</th>
+                                    <th scope="col" class="table-primary">2am-8am</th>
+                                    <th scope="col">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="income in incomeList">
+                                    <td scope="row">{{ income.treatement }}</td>
+                                    <td class="table-danger">{{ income.turns['8am2pm'].value }}</td>
+                                    <td class="table-danger">{{ income.turns['2pm8pm'].value }}</td>
+                                    <td class="table-primary">{{ income.turns['8pm2am'].value }}</td>
+                                    <td class="table-primary">{{ income.turns['2am8am'].value }}</td>
+                                    <td>96</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Sub Total</th>
+                                    <th>96</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>96</th>
+                                <tr class="table-light">
+                                    <th scope="row">Total</th>
+                                    <th>96</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>96</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <p class="h4 text-center">Egresos</p>
+                        <table class="table table-hover table-sm table-bordered"">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="col-4">&nbsp;</th>
+                                    <th scope="col" class="table-danger">8am-2pm</th>
+                                    <th scope="col" class="table-danger">2pm-8pm</th>
+                                    <th scope="col" class="table-primary">8pm-2am</th>
+                                    <th scope="col" class="table-primary">2am-8am</th>
+                                    <th scope="col">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="outcome in outcomeList">
+                                    <td scope="row">{{ outcome.treatement }}</td>
+                                    <td class="table-danger">{{ outcome.turns['8am2pm'].value }}</td>
+                                    <td class="table-danger">{{ outcome.turns['2pm8pm'].value }}</td>
+                                    <td class="table-primary">{{ outcome.turns['8pm2am'].value }}</td>
+                                    <td class="table-primary">{{ outcome.turns['2am8am'].value }}</td>
+                                    <td>96</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="activeTab=='notes'">
+                <div class="row ml-0 pt-2">
+                    <div class="pl-0 col-12 col-md-10">
+                        <h4>Balance Hídrico</h4>
+                    </div>
+                    <div class="pl-0 col-12 col-md-2">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#notes">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mt-4">
+                    <div class="col">
+                        <p class="h4 text-center">Turno Día</p>
+                        <table class="table table-hover table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="w-25">Fecha y Hora de Registro</th>
+                                    <th scope="col">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="day in dayList">
+                                    <td scope="row">{{ day.hour }}</td>
+                                    <td>{{ day.observation }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <p class="h4 text-center">Turno Noche</p>
+                        <table class="table table-hover table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="w-25">Fecha y Hora de Registro</th>
+                                    <th scope="col">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="night in nightList">
+                                    <td scope="row">{{ night.hour }}</td>
+                                    <td>{{ night.observation }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="tracking" tabindex="-1" role="dialog" aria-labelledby="trackingModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="trackingModalLabel">Agregar registro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="hourRecord">Hora</label>
+                            <select class="custom-select form-control"
+                                    ng-model="selectedHourNursery"
+                                    ng-options="x.hour as x.label for x in nurseryHours">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="topicRecord">Procedimiento</label>
+                            <select class="custom-select form-control" id="topicRecord"
+                                    ng-model="topicNursery"
+                                    ng-options="procedure.id as procedure.procedimiento for procedure in allProceduresList">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="valueRecord">Valor</label>
+                            <input type="text" class="form-control" id="valueRecord" ng-model="valueNursery">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" ng-click="saveNurseryRecord()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="hydric" tabindex="-1" role="dialog" aria-labelledby="hydricModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="hydricModalLabel">Agregar registro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="hourRecord">Hora</label>
+                            <select class="custom-select form-control" id="hourRecord" ng-model="balanceHourRecord">
+                                <option value="8am2pm">8am - 2pm</option>
+                                <option value="2pm8pm">2pm - 8pm</option>
+                                <option value="8pm2am">8pm - 2am</option>
+                                <option value="2am8am">2am - 8am</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="treatments">Tratamiento</label>
+                            <select class="custom-select form-control" id="treatments"
+                                    ng-model="treatmentTypeId"
+                                    ng-options="treatment.id as treatment.tratamiento for treatment in treatmentsList">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="valueRecord">Valor</label>
+                            <input type="text" class="form-control" id="valueRecord" ng-model="valueBalance">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" ng-click="saveBalanceRecord()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="notes" tabindex="-1" role="dialog" aria-labelledby="notesModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notesModalLabel">Agregar registro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="turnRecord">Turno</label>
+                            <select class="custom-select form-control" id="turnRecord" ng-model="turnObs">
+                                <option value="1">Turno día</option>
+                                <option value="2">Turno noche</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="noteRecord">Observación</label>
+                            <textarea rows="7" class="form-control" id="noteRecord" ng-model="noteObs"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" ng-click="saveObsRecord()">Guardar</button>
                 </div>
             </div>
         </div>

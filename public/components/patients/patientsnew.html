@@ -8,19 +8,19 @@
     </div>
     <form>
         <div class="row">
-            <div class="col col-sm-4">
+            <div class="col-12 col-md-4">
                 <div class="form-group">
                     <label for="name">Nombres</label>
                     <input type="text" class="form-control" id="name" ng-model="name">
                 </div>
             </div>
-            <div class="col col-sm-4">
+            <div class="col-12 col-md-4">
                 <div class="form-group">
                     <label for="first_last_name">Apellido Paterno</label>
                     <input type="text" class="form-control" id="first_last_name" ng-model="first_last_name">
                 </div>
             </div>
-            <div class="col col-sm-4">
+            <div class="col-12 col-md-4">
                 <div class="form-group">
                     <label for="second_last_name">Apellido Materno</label>
                     <input type="text" class="form-control" id="second_last_name" ng-model="second_last_name">
@@ -28,24 +28,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col col-sm-4">
+            <div class="col-12 col-md-4">
                 <div class="form-group">
                     <label>Fecha de Nacimiento</label><br>
                     <md-datepicker
                         ng-model="birthday"
                         md-max-date="today"
                         md-current-view="month"
-                        ng-change="dateChange()"
                     ></md-datepicker>
                 </div>
             </div>
-            <div class="col col-sm-4">
-                <div class="form-group">
-                    <label for="dni">DNI</label>
-                    <input type="text" class="form-control" id="dni" ng-model="dni">
-                </div>
-            </div>
-            <div class="col col-sm-4">
+            <div class="col-12 col-md-4">
                 <div class="form-group">
                     <label for="sex">Sexo</label>
                     <select class="custom-select form-control" id="sex" ng-model="sex">
@@ -54,21 +47,27 @@
                     </select>
                 </div>
             </div>
+            <div class="col-12 col-md-4">
+                <div class="form-group">
+                    <label for="dni">DNI</label>
+                    <input type="text" class="form-control" id="dni" ng-model="dni">
+                </div>
+            </div>
         </div>
         <div class="row">
-            <div class="col col-sm-4">
+            <div class="col-6 col-md-4">
                 <div class="form-group">
                     <label for="land_line">Teléfono</label>
                     <input type="text" class="form-control" id="land_line" ng-model="land_line">
                 </div>
             </div>
-            <div class="col col-sm-4">
+            <div class="col-6 col-md-4">
                 <div class="form-group">
                     <label for="mobile_line">Celular</label>
                     <input type="text" class="form-control" id="mobile_line" ng-model="mobile_line">
                 </div>
             </div>
-            <div class="col col-sm-4">
+            <div class="col-12 col-md-4">
                 <div class="form-group">
                     <label for="email">Correo Electrónico</label>
                     <input type="text" class="form-control" id="email" ng-model="email">
@@ -76,37 +75,33 @@
             </div>
         </div>
         <div class="row">
-            <div class="col col-sm-8">
+            <div class="col-12">
                 <div class="form-group">
                     <label for="address">Dirección</label>
                     <input type="text" class="form-control" id="address" ng-model="address">
                 </div>
             </div>
-            <div class="col col-sm-4">
-                &nbsp;
-            </div>
         </div>
         <div class="row">
-            <div class="col col-sm-8">
+            <div class="col-12 col-md-8">
                 <div class="form-group">
                     <label for="doctor">Médico Tratante</label>
                     <input type="text" class="form-control" id="doctor" ng-model="doctor">
                 </div>
             </div>
-            <div class="col col-sm-4">
+            <div class="col-12 col-md-4">
                 <div class="form-group">
                     <label>Fecha de Ingreso</label><br>
                     <md-datepicker
                         ng-model="startDate"
                         md-max-date="today"
                         md-current-view="month"
-                        ng-change="dateChange()"
                     ></md-datepicker>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col col-sm-4">
+            <div class="col-12">
                 <div class="form-group">
                     <button class="btn btn-primary" ng-click="savePatient();">Guardar</button>
                 </div>

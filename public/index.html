@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Asteria App</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
     <link href="/assets/font/css/open-iconic-bootstrap.css" rel="stylesheet">
@@ -37,40 +38,31 @@
     <script src="components/nursing/medicinecontroller.js"></script>
 </head>
 <body>
-<div class="view-container" ng-app="AsteriaApp">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <span class="navbar-brand mb-0 h1">Asteria</span>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/#!/patients">Pacientes</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Enfermería</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/#!/nursing/treatments">Tratamientos</a>
-                        <a class="dropdown-item" href="/#!/nursing/procedures">Procedimientos</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/#!/nursing/medicines">Medicinas</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/#!/users">Usuarios</a>
-                </li>
-            </ul>
-            <a class="nav-link" href="#">Salir</a>
-        </div>
-    </nav>
     <div class="bgimage">
-        <div class="container-fluid">
-            <div class="row">
-                &nbsp;
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <span class="navbar-brand mb-0 h1">Asteria</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#!/patients">Pacientes</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Enfermería</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/#!/nursing/treatments">Tratamientos</a>
+                            <a class="dropdown-item" href="/#!/nursing/procedures">Procedimientos</a>
+                        </div>
+                    </li>
+                </ul>
+                <a class="nav-link" href="#">Salir</a>
             </div>
-        </div>
+        </nav>
     </div>
-    <div ng-view class="view-frame"></div>
-</div>
-
+    <div class="container-fluid" ng-app="AsteriaApp">
+        <div ng-view class="view-frame"></div>
+    </div>
 </body>
 </html>
