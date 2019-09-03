@@ -86,6 +86,8 @@ angular.module('patients')
             }).then(function successCallback(response) {
                 $scope.incomeList = response.data.income;
                 $scope.outcomeList = response.data.outcome;
+                $scope.subTotalVIncome = response.data.subTotalVIncome;
+                $scope.subTotalVOutcome = response.data.subTotalVOutcome;
             });
         }
 

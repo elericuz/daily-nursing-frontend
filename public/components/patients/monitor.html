@@ -79,36 +79,36 @@
                         <table class="table table-hover table-sm table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col">&nbsp;</th>
-                                    <th scope="col" class="table-danger">8am</th>
-                                    <th scope="col" class="table-danger">10am</th>
-                                    <th scope="col" class="table-danger">12am</th>
-                                    <th scope="col" class="table-danger">2pm</th>
-                                    <th scope="col" class="table-danger">4pm</th>
-                                    <th scope="col" class="table-danger">6pm</th>
-                                    <th scope="col" class="table-primary">8pm</th>
-                                    <th scope="col" class="table-primary">10pm</th>
-                                    <th scope="col" class="table-primary">12pm</th>
-                                    <th scope="col" class="table-primary">2am</th>
-                                    <th scope="col" class="table-primary">4am</th>
-                                    <th scope="col" class="table-primary">6am</th>
+                                    <th scope="col" class="col-2">&nbsp;</th>
+                                    <th scope="col" class="table-primary text-center">8am</th>
+                                    <th scope="col" class="table-primary text-center">10am</th>
+                                    <th scope="col" class="table-primary text-center">12am</th>
+                                    <th scope="col" class="table-primary text-center">2pm</th>
+                                    <th scope="col" class="table-primary text-center">4pm</th>
+                                    <th scope="col" class="table-primary text-center">6pm</th>
+                                    <th scope="col" class="table-danger text-center">8pm</th>
+                                    <th scope="col" class="table-danger text-center">10pm</th>
+                                    <th scope="col" class="table-danger text-center">12pm</th>
+                                    <th scope="col" class="table-danger text-center">2am</th>
+                                    <th scope="col" class="table-danger text-center">4am</th>
+                                    <th scope="col" class="table-danger text-center">6am</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="procedure in proceduresList">
                                     <td scope="row">{{ procedure.procedure }}</td>
-                                    <td class="table-danger">{{ procedure.turns['8am'].value }}</td>
-                                    <td class="table-danger">{{ procedure.turns['10am'].value }}</td>
-                                    <td class="table-danger">{{ procedure.turns['12am'].value }}</td>
-                                    <td class="table-danger">{{ procedure.turns['2pm'].value }}</td>
-                                    <td class="table-danger">{{ procedure.turns['4pm'].value }}</td>
-                                    <td class="table-danger">{{ procedure.turns['6pm'].value }}</td>
-                                    <td class="table-primary">{{ procedure.turns['8pm'].value }}</td>
-                                    <td class="table-primary">{{ procedure.turns['10pm'].value }}</td>
-                                    <td class="table-primary">{{ procedure.turns['12pm'].value }}</td>
-                                    <td class="table-primary">{{ procedure.turns['2am'].value }}</td>
-                                    <td class="table-primary">{{ procedure.turns['4am'].value }}</td>
-                                    <td class="table-primary">{{ procedure.turns['6am'].value }}</td>
+                                    <td class="table-primary">{{ procedure.turns['8am'].value }}</td>
+                                    <td class="table-primary">{{ procedure.turns['10am'].value }}</td>
+                                    <td class="table-primary">{{ procedure.turns['12am'].value }}</td>
+                                    <td class="table-primary">{{ procedure.turns['2pm'].value }}</td>
+                                    <td class="table-primary">{{ procedure.turns['4pm'].value }}</td>
+                                    <td class="table-primary">{{ procedure.turns['6pm'].value }}</td>
+                                    <td class="table-danger">{{ procedure.turns['8pm'].value }}</td>
+                                    <td class="table-danger">{{ procedure.turns['10pm'].value }}</td>
+                                    <td class="table-danger">{{ procedure.turns['12pm'].value }}</td>
+                                    <td class="table-danger">{{ procedure.turns['2am'].value }}</td>
+                                    <td class="table-danger">{{ procedure.turns['4am'].value }}</td>
+                                    <td class="table-danger">{{ procedure.turns['6am'].value }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -151,36 +151,34 @@
                             <thead>
                                 <tr>
                                     <th scope="col" class="col-4">&nbsp;</th>
-                                    <th scope="col" class="table-danger">8am-2pm</th>
-                                    <th scope="col" class="table-danger">2pm-8pm</th>
-                                    <th scope="col" class="table-primary">8pm-2am</th>
-                                    <th scope="col" class="table-primary">2am-8am</th>
+                                    <th scope="col" class="table-primary text-center">8am-2pm</th>
+                                    <th scope="col" class="table-primary text-center">2pm-8pm</th>
+                                    <th scope="col" class="table-danger text-center">8pm-2am</th>
+                                    <th scope="col" class="table-danger text-center">2am-8am</th>
                                     <th scope="col">Total</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="income in incomeList">
                                     <td scope="row">{{ income.treatement }}</td>
-                                    <td class="table-danger">{{ income.turns['8am2pm'].value }}</td>
-                                    <td class="table-danger">{{ income.turns['2pm8pm'].value }}</td>
-                                    <td class="table-primary">{{ income.turns['8pm2am'].value }}</td>
-                                    <td class="table-primary">{{ income.turns['2am8am'].value }}</td>
-                                    <td>96</td>
+                                    <td class="table-primary text-right">{{ income.turns['8am2pm'].value }}</td>
+                                    <td class="table-primary text-right">{{ income.turns['2pm8pm'].value }}</td>
+                                    <td class="table-danger text-right">{{ income.turns['8pm2am'].value }}</td>
+                                    <td class="table-danger text-right">{{ income.turns['2am8am'].value }}</td>
+                                    <td class="text-right">{{ income.subTotal }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Sub Total</th>
-                                    <th>96</th>
-                                    <th>&nbsp;</th>
-                                    <th>&nbsp;</th>
-                                    <th>&nbsp;</th>
-                                    <th>96</th>
+                                    <th class="table-primary text-right">{{ subTotalVIncome['8am2pm'] }}</th>
+                                    <th class="table-primary text-right">{{ subTotalVIncome['2pm8pm'] }}</th>
+                                    <th class="table-danger text-right">{{ subTotalVIncome['8pm2am'] }}</th>
+                                    <th class="table-danger text-right">{{ subTotalVIncome['2am8am'] }}</th>
+                                    <th class="text-right">{{ subTotalVIncome['8am2pm'] + subTotalVIncome['2pm8pm'] + subTotalVIncome['8pm2am'] + subTotalVIncome['2am8am'] }}</th>
                                 <tr class="table-light">
                                     <th scope="row">Total</th>
-                                    <th>96</th>
-                                    <th>&nbsp;</th>
-                                    <th>&nbsp;</th>
-                                    <th>&nbsp;</th>
-                                    <th>96</th>
+                                    <th colspan="2" class="text-right">{{ subTotalVIncome['8am2pm'] + subTotalVIncome['2pm8pm'] }}</th>
+                                    <th colspan="2" class="text-right">{{ subTotalVIncome['8pm2am'] + subTotalVIncome['2am8am'] }}</th>
+                                    <th class="text-right">{{ subTotalVIncome['8am2pm'] + subTotalVIncome['2pm8pm'] + subTotalVIncome['8pm2am'] + subTotalVIncome['2am8am'] }}</th>
                                 </tr>
                             </tbody>
                         </table>
@@ -193,23 +191,57 @@
                             <thead>
                                 <tr>
                                     <th scope="col" class="col-4">&nbsp;</th>
-                                    <th scope="col" class="table-danger">8am-2pm</th>
-                                    <th scope="col" class="table-danger">2pm-8pm</th>
-                                    <th scope="col" class="table-primary">8pm-2am</th>
-                                    <th scope="col" class="table-primary">2am-8am</th>
+                                    <th scope="col" class="table-primary text-center">8am-2pm</th>
+                                    <th scope="col" class="table-primary text-center">2pm-8pm</th>
+                                    <th scope="col" class="table-danger text-center">8pm-2am</th>
+                                    <th scope="col" class="table-danger text-center">2am-8am</th>
                                     <th scope="col">Total</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="outcome in outcomeList">
                                     <td scope="row">{{ outcome.treatement }}</td>
-                                    <td class="table-danger">{{ outcome.turns['8am2pm'].value }}</td>
-                                    <td class="table-danger">{{ outcome.turns['2pm8pm'].value }}</td>
-                                    <td class="table-primary">{{ outcome.turns['8pm2am'].value }}</td>
-                                    <td class="table-primary">{{ outcome.turns['2am8am'].value }}</td>
-                                    <td>96</td>
+                                    <td class="table-primary text-right">{{ outcome.turns['8am2pm'].value }}</td>
+                                    <td class="table-primary text-right">{{ outcome.turns['2pm8pm'].value }}</td>
+                                    <td class="table-danger text-right">{{ outcome.turns['8pm2am'].value }}</td>
+                                    <td class="table-danger text-right">{{ outcome.turns['2am8am'].value }}</td>
+                                    <td class="text-right">{{ outcome.subTotal }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Sub Total</th>
+                                    <th class="table-primary text-right">{{ subTotalVOutcome['8am2pm'] }}</th>
+                                    <th class="table-primary text-right">{{ subTotalVOutcome['2pm8pm'] }}</th>
+                                    <th class="table-danger text-right">{{ subTotalVOutcome['8pm2am'] }}</th>
+                                    <th class="table-danger text-right">{{ subTotalVOutcome['2am8am'] }}</th>
+                                    <th class="text-right">{{ subTotalVOutcome['8am2pm'] + subTotalVOutcome['2pm8pm'] + subTotalVOutcome['8pm2am'] + subTotalVOutcome['2am8am'] }}</th>
+                                <tr class="table-light">
+                                    <th scope="row">Total</th>
+                                    <th colspan="2" class="text-right">{{ subTotalVOutcome['8am2pm'] + subTotalVOutcome['2pm8pm'] }}</th>
+                                    <th colspan="2" class="text-right">{{ subTotalVOutcome['8pm2am'] + subTotalVOutcome['2am8am'] }}</th>
+                                    <th class="text-right">{{ subTotalVOutcome['8am2pm'] + subTotalVOutcome['2pm8pm'] + subTotalVOutcome['8pm2am'] + subTotalVOutcome['2am8am'] }}</th>
                                 </tr>
                             </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <table class="table table-hover table-sm table-bordered"">
+                            <tr>
+                                <th scope="col" class="col-2">Balance 12Hrs</th>
+                                <th scope="col" class="col-2">
+                                    {{ (subTotalVIncome['8am2pm'] + subTotalVIncome['2pm8pm']) - (subTotalVOutcome['8am2pm'] + subTotalVOutcome['2pm8pm']) }}
+                                </th>
+                                <th scope="col" class="col-2">Balance 24Hrs</th>
+                                <th scope="col" class="col-2">
+                                    {{
+                                        (subTotalVIncome['8am2pm'] + subTotalVIncome['2pm8pm'] + subTotalVIncome['8pm2am'] + subTotalVIncome['2am8am']) -
+                                        (subTotalVOutcome['8am2pm'] + subTotalVOutcome['2pm8pm'] + subTotalVOutcome['8pm2am'] + subTotalVOutcome['2am8am'])
+                                    }}
+                                </th>
+                                <th scope="col" class="col-2">Balance Acumulado</th>
+                                <th scope="col" class="col-2">&nbsp;</th>
+                            </tr>
                         </table>
                     </div>
                 </div>
